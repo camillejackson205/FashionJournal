@@ -1,33 +1,33 @@
 var router = require('express').Router();
 var sequelize = require('../db');
 var User = sequelize.import('../models/user');
-var Style = sequelize.import('../models/style');
+var History = sequelize.import('../models/history');
 // Style.sync({force: true})
 router.post('/', function(req, res) {
 	// req has some body properties that have a username and pwd
 	console.log(req.body)
-	var occassion = req.body.style.occassion;
-	var weather = req.body.style.weather;
-	var mood = req.body.style.mood;
-	var outfit = req.body.style.outfit;
+	var occassion = req.body.history.occassion;
+	var weather = req.body.history.weather;
+	var mood = req.body.history.mood;
+	var outfit = req.body.history.link;
     var owner  = req.user.id;
     
    
 
     // Use our sequelize model to create log
-  	Style
+  	History
 	    .create({ 
 			occassion: occassion,
 			weather: weather,
 			mood: mood,
-			outfit: outfit,
+			outfit: link,
 	    	owner: owner
 	    	
 	    })
 	    .then(
 	    	function createSuccess(style) {
 	    		res.json({
-					style: style
+					history: history
 				});
 	    	}, 
 		    function createError(err) {
@@ -39,7 +39,7 @@ router.post('/', function(req, res) {
 router.get('/', function(req, res) {
 	console.log(req.user)
 	var userid = req.user.id;
-	Style
+	History
 	.findAll({
 		where: { owner: userid }
 	})
@@ -59,7 +59,7 @@ router.get('/', function(req, res) {
 router.get('/:id', function(req, res) {
 	var data = req.params.id;
 	//console.log(data); here for testing purposes
-	Style
+    History
 		.findOne({
 			where: { id: data }
 		}).then(
@@ -75,25 +75,25 @@ router.get('/:id', function(req, res) {
 
 //This will return the data from the log that was updated
 router.put('/', function(req, res) {
-	var occassion = req.body.style.occassion;
-	var weather = req.body.style.weather;
-	var mood = req.body.style.weather;
-	var outfit = req.body.style.outfit; 
-    var data = req.body.style.id;
+	var occassion = req.body.history.occassion;
+	var weather = req.body.history.weather;
+	var mood = req.body.history.weather;
+	var outfit = req.body.history.link; 
+    var data = req.body.history.id;
     console.log(req);
-    Style
+    History
     	.update(
     	{
 			occassion: occassion,
 			weather: weather,
 			mood: mood,
-			outfit: outfit
+			outfit: link
     	},
 
     	{where: {id: data}}
     	).then(
-    		function updateSuccess(updatedStyle) {
-    			res.json(updatedStyle);
+    		function updateSuccess(updatedHistory) {
+    			res.json(updatedHistory);
     		},
 
     		function updateError(err){
@@ -104,8 +104,8 @@ router.put('/', function(req, res) {
 
 
 router.delete('/', function(req, res) {
-	var data = req.body.style.id;
-	Style
+	var data = req.body.history.id;
+	History
 		.destroy({
 			where: { id: data }
 		}).then(
