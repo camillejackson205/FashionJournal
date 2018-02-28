@@ -4,7 +4,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var sequelize = require('./db.js');
+var History = sequelize.import('./models/history.js');
 
+// History.sync();
 
 //   sequelize.sync({force:true});
 sequelize.sync();
@@ -17,7 +19,7 @@ app.use('/api/user', require('./routes/user'));
 //login route
 app.use('/api/login', require('./routes/session'));
 app.use('/api/style', require('./routes/style'));
-
+app.use('/api/history', require('./routes/history'));
 
 
 

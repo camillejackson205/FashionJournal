@@ -45,7 +45,7 @@ router.get('/', function(req, res) {
 	})
 	.then(
 		function findAllSuccess(data) {
-			 console.log(data);
+			//  console.log(data);
 			res.json(data);
 		},
 		function findAllError(err) {

@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
         occassion: DataTypes.STRING,
         weather: DataTypes.STRING,
         mood: DataTypes.STRING,
-        outfit: DataTypes.STRINGa,
+        outfit: DataTypes.STRING,
         owner : DataTypes.INTEGER
     },{
     });

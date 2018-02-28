@@ -6,10 +6,10 @@ var History = sequelize.import('../models/history');
 router.post('/', function(req, res) {
 	// req has some body properties that have a username and pwd
 	console.log(req.body)
-	var occassion = req.body.history.occassion;
-	var weather = req.body.history.weather;
-	var mood = req.body.history.mood;
-	var outfit = req.body.history.link;
+	var occassion = req.body.history.outfit.occassion;
+	var weather = req.body.history.outfit.weather;
+	var mood = req.body.history.outfit.mood;
+	var outfit = req.body.history.outfit.link;
     var owner  = req.user.id;
     
    
@@ -20,12 +20,12 @@ router.post('/', function(req, res) {
 			occassion: occassion,
 			weather: weather,
 			mood: mood,
-			outfit: link,
+			outfit: outfit,
 	    	owner: owner
 	    	
 	    })
 	    .then(
-	    	function createSuccess(style) {
+	    	function createSuccess(history) {
 	    		res.json({
 					history: history
 				});
@@ -87,7 +87,7 @@ router.put('/', function(req, res) {
 			occassion: occassion,
 			weather: weather,
 			mood: mood,
-			outfit: link
+			outfit: outfit
     	},
 
     	{where: {id: data}}
